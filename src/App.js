@@ -1,7 +1,15 @@
-import "./styles/reset.css";
+import { CurrentAndLatestGames, MainContent } from "./components";
+import "./styles/app_styles.scss";
+import "./styles/reset.scss";
+import "./styles/global_colors.scss";
 
 function App() {
-  return <h1>Hello World</h1>;
+  return (
+    <div className='app'>
+      <CurrentAndLatestGames />
+      <MainContent />
+    </div>
+  );
 }
 
 export default App;
