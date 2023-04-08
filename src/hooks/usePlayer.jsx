@@ -21,11 +21,11 @@ export const PlayerProvider = ({ children }) => {
     //? local score data example
     //! {
     //!   playerName: "Eduardo",
-    //!   score: 20
+    //!   playerScore: 20
     //! }
 
     const onlyScores = scoresArr.map(
-      (localScore) => localScore.score
+      (localScore) => localScore.playerScore
     );
 
     let higherNumber = onlyScores[0];
@@ -60,6 +60,8 @@ export const PlayerProvider = ({ children }) => {
         setPlayerUserName,
         playerScore,
         setPlayerScore,
+        localScores,
+        setLocalScores,
         highScore,
         handleAddLocalScore,
         handleIncrementScore,

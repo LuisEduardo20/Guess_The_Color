@@ -5,14 +5,19 @@ import React, {
   useCallback,
   useEffect,
 } from "react";
-import { useLocalStorage } from "./useLocalSorage";
 import { generateHexColor } from "../utils/generateHexColor";
 import { usePlayer } from "./usePlayer";
 
 const GameContext = createContext({});
 
 export const GameProvider = ({ children }) => {
-  const { playerScore, setPlayerScore } = usePlayer();
+  const {
+    playerScore,
+    playerName,
+    localScores,
+    setLocalScores,
+    setPlayerScore,
+  } = usePlayer();
 
   const [gameTime, setGameTime] = useState(30);
   const [gameDifficulty, setGameDifficulty] = useState("easy-mode");
@@ -54,10 +59,16 @@ export const GameProvider = ({ children }) => {
     setGameTime(30);
     setQuestion({});
     setPlayerScore(0);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleEndGame = () => {
-    //TODO Setar no local storage o score e nome atual
+    const playerResult = {
+      playerName,
+      playerScore,
+    };
+
+    setLocalScores([...localScores, playerResult]);
   };
 
   useEffect(() => {
@@ -68,6 +79,7 @@ export const GameProvider = ({ children }) => {
       if (gameTime <= 0) {
         clearInterval(interval);
         handleRestartGame();
+        handleEndGame();
       }
 
       interval = setInterval(() => {
@@ -76,6 +88,7 @@ export const GameProvider = ({ children }) => {
     }
 
     return () => clearInterval(interval);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isGameStarted, gameTime]);
 
   return (

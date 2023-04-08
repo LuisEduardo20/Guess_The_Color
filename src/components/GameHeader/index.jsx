@@ -22,7 +22,7 @@ const GameHeader = () => {
       <section className='score'>
         <div>
           <h5>High Score</h5>
-          <p>{highScore ? highScore.score : "Empty"}</p>
+          <p>{highScore ? highScore.playerScore : "Empty"}</p>
         </div>
 
         <div>
