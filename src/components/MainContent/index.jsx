@@ -7,7 +7,10 @@ const MainContent = () => {
   return (
     <div className='main-content'>
       <section className='game-container'>
+        <h1>Guess the color</h1>
+
         <GameHeader />
+
         <GameBody />
       </section>
     </div>
