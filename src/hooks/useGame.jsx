@@ -46,6 +46,7 @@ export const GameProvider = ({ children }) => {
   const handleStartGame = useCallback(() => {
     setIsGameStarted(true);
     handleGenerateQuestion();
+    setOldQuestionsArr([]);
   }, [handleGenerateQuestion]);
 
   const handleRestartGame = useCallback(() => {
@@ -85,6 +86,7 @@ export const GameProvider = ({ children }) => {
         question,
         gameDifficulty,
         setGameDifficulty,
+        oldQuestionsArr,
         setOldQuestionsArr,
         handleStartGame,
         handleRestartGame,
