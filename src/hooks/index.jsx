@@ -4,9 +4,9 @@ import { GameProvider } from "./useGame";
 
 const ContextProviders = ({ children }) => {
   return (
-    <GameProvider>
-      <PlayerProvider>{children}</PlayerProvider>;
-    </GameProvider>
+    <PlayerProvider>
+      <GameProvider>{children}</GameProvider>
+    </PlayerProvider>
   );
 };
 
