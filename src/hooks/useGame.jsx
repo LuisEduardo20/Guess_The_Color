@@ -2,57 +2,68 @@ import React, {
   useState,
   useContext,
   createContext,
-  useMemo,
   useCallback,
   useEffect,
 } from "react";
 import { useLocalStorage } from "./useLocalSorage";
 import { generateHexColor } from "../utils/generateHexColor";
+import { usePlayer } from "./usePlayer";
 
 const GameContext = createContext({});
 
 export const GameProvider = ({ children }) => {
-  const [gameTime, setGameTime] = useState(10);
+  const { playerScore, setPlayerScore } = usePlayer();
+
+  const [gameTime, setGameTime] = useState(30);
   const [gameDifficulty, setGameDifficulty] = useState("easy-mode");
   const [isGameStarted, setIsGameStarted] = useState(false);
   const [question, setQuestion] = useState({});
   const [oldQuestionsArr, setOldQuestionsArr] = useState([]);
 
-  const handleDecrementGameTime = () =>
-    setGameTime((second) => second - 1);
+  const handleDecrementGameTime = (decrementTime = 1) =>
+    setGameTime((second) => second - decrementTime);
+
+  const handleIncrementGameTime = (incrementTime = 1) =>
+    setGameTime((second) => second + incrementTime);
 
   const handleGenerateQuestion = useCallback(() => {
     const question = {
+      answer0: generateHexColor(),
       answer1: generateHexColor(),
       answer2: generateHexColor(),
-      answer3: generateHexColor(),
     };
 
     if (gameDifficulty === "medium-mode") {
-      question.answer4 = generateHexColor();
+      question.answer3 = generateHexColor();
     } else if (gameDifficulty === "hard-mode") {
+      question.answer3 = generateHexColor();
       question.answer4 = generateHexColor();
-      question.answer5 = generateHexColor();
     }
 
     setQuestion(question);
   }, [gameDifficulty]);
 
-  const handleStartGame = () => {
+  const handleStartGame = useCallback(() => {
     setIsGameStarted(true);
     handleGenerateQuestion();
-  };
+  }, [handleGenerateQuestion]);
 
-  const handleRestartGame = () => {
+  const handleRestartGame = useCallback(() => {
     setIsGameStarted(false);
     setGameTime(30);
     setQuestion({});
+    setPlayerScore(0);
+  }, []);
+
+  const handleEndGame = () => {
+    //TODO Setar no local storage o score e nome atual
   };
 
   useEffect(() => {
     let interval = null;
 
     if (isGameStarted) {
+      //? Clear interval and reset game data after time out
       if (gameTime <= 0) {
         clearInterval(interval);
         handleRestartGame();
@@ -74,9 +85,12 @@ export const GameProvider = ({ children }) => {
         question,
         gameDifficulty,
         setGameDifficulty,
+        setOldQuestionsArr,
         handleStartGame,
         handleRestartGame,
         handleGenerateQuestion,
+        handleIncrementGameTime,
+        handleDecrementGameTime,
       }}
     >
       {children}
