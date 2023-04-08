@@ -1,24 +1,86 @@
-import React, { useState } from "react";
+import React, {
+  useCallback,
+  useEffect,
+  useMemo,
+  useState,
+} from "react";
 import { useGame } from "../../hooks/useGame";
+import { usePlayer } from "../../hooks/usePlayer";
 
 import "./styles.scss";
 
 const GameBody = () => {
+  const { handleIncrementScore } = usePlayer();
+
   const {
     gameTime,
     isGameStarted,
     question,
     gameDifficulty,
+    setOldQuestionsArr,
     handleStartGame,
+    handleGenerateQuestion,
+    handleIncrementGameTime,
+    handleDecrementGameTime,
   } = useGame();
 
-  const [isMediumMode, setIsMediumMode] = useState(
-    gameDifficulty === "medium-mode" || gameDifficulty === "hard-mode"
+  const [isMediumMode, setIsMediumMode] = useState(false);
+  const [isHardMode, setIsHardMode] = useState(false);
+
+  const questionAnswer = useMemo(() => {
+    //? Get the number of questions according to the game difficulty
+    const answersQuantity =
+      gameDifficulty === "easy-mode"
+        ? 2
+        : gameDifficulty === "medium-mode"
+        ? 3
+        : 4;
+
+    //? Get random index to set as
+    const randomIndex = Math.floor(Math.random() * answersQuantity);
+
+    return question[`answer${randomIndex}`];
+  }, [gameDifficulty, question]);
+
+  const handleClickQuestionAnswer = useCallback(
+    (hexColor) => {
+      const formatedQuestionForOldQuestionsArr = {
+        questionAnswer: questionAnswer,
+        clickedAnswer: hexColor,
+        hitQuestion: true,
+      };
+
+      if (hexColor === questionAnswer) {
+        handleIncrementScore();
+        handleIncrementGameTime(3);
+      } else {
+        handleDecrementGameTime(3);
+        formatedQuestionForOldQuestionsArr.hitQuestion = false;
+      }
+
+      setOldQuestionsArr((oldQuestions) => [
+        ...oldQuestions,
+        formatedQuestionForOldQuestionsArr,
+      ]);
+
+      handleGenerateQuestion();
+    },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [questionAnswer]
   );
 
-  const [isHardMode, setIsHardMode] = useState(
-    gameDifficulty === "hard-mode"
-  );
+  useEffect(() => {
+    if (gameDifficulty === "medium-mode") {
+      setIsMediumMode(true);
+      setIsHardMode(false);
+    } else if (gameDifficulty === "hard-mode") {
+      setIsHardMode(true);
+      setIsMediumMode(true);
+    } else {
+      setIsHardMode(false);
+      setIsMediumMode(false);
+    }
+  }, [gameDifficulty]);
 
   return (
     <div className='body'>
@@ -28,7 +90,7 @@ const GameBody = () => {
 
       <section
         className='question-color'
-        style={{ backgroundColor: question.answer1 }}
+        style={{ backgroundColor: questionAnswer }}
       >
         {!isGameStarted && (
           <button onClick={handleStartGame}>start</button>
@@ -37,16 +99,53 @@ const GameBody = () => {
 
       {isGameStarted && (
         <section className='answers-container easy-mode'>
-          <button className='answer'>{question.answer1}</button>
-          <button className='answer'>{question.answer2}</button>
-          <button className='answer'>{question.answer3}</button>
+          <button
+            className='answer'
+            onClick={() =>
+              handleClickQuestionAnswer(question.answer0)
+            }
+          >
+            {question.answer0}
+          </button>
+
+          <button
+            className='answer'
+            onClick={() =>
+              handleClickQuestionAnswer(question.answer1)
+            }
+          >
+            {question.answer1}
+          </button>
+
+          <button
+            className='answer'
+            onClick={() =>
+              handleClickQuestionAnswer(question.answer2)
+            }
+          >
+            {question.answer2}
+          </button>
 
           {isMediumMode && (
-            <button className='answer'>{question.answer4}</button>
+            <button
+              className='answer'
+              onClick={() =>
+                handleClickQuestionAnswer(question.answer3)
+              }
+            >
+              {question.answer3}
+            </button>
           )}
 
           {isHardMode && (
-            <button className='answer'>{question.answer5}</button>
+            <button
+              className='answer'
+              onClick={() =>
+                handleClickQuestionAnswer(question.answer4)
+              }
+            >
+              {question.answer4}
+            </button>
           )}
         </section>
       )}
