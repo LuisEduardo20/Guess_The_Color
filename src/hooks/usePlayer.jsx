@@ -9,7 +9,6 @@ import { useLocalStorage } from "./useLocalSorage";
 const PlayerContext = createContext({});
 
 export const PlayerProvider = ({ children }) => {
-  const [isGameStarted, setIsGameStarted] = useState(false);
   const [playerUserName, setPlayerUserName] = useState("");
   const [playerScore, setPlayerScore] = useState(0);
   const [localScores, setLocalScores] = useLocalStorage(
@@ -52,8 +51,6 @@ export const PlayerProvider = ({ children }) => {
   return (
     <PlayerContext.Provider
       value={{
-        isGameStarted,
-        setIsGameStarted,
         playerUserName,
         setPlayerUserName,
         playerScore,
