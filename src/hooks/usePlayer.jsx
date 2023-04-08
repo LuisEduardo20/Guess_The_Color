@@ -3,6 +3,7 @@ import React, {
   useContext,
   createContext,
   useMemo,
+  useCallback,
 } from "react";
 import { useLocalStorage } from "./useLocalSorage";
 
@@ -40,13 +41,17 @@ export const PlayerProvider = ({ children }) => {
     return scoresArr[higherIndex];
   };
 
+  const handleAddLocalScore = () => {
+    //TODO function to add score on local storage
+  };
+
   const highScore = useMemo(() => {
     return handleGetHighScore(localScores);
   }, [localScores]);
 
-  const handleAddLocalScore = () => {
-    //TODO function to add score on local storage
-  };
+  const handleIncrementScore = useCallback(() => {
+    setPlayerScore((score) => score + 4);
+  }, []);
 
   return (
     <PlayerContext.Provider
@@ -57,6 +62,7 @@ export const PlayerProvider = ({ children }) => {
         setPlayerScore,
         highScore,
         handleAddLocalScore,
+        handleIncrementScore,
       }}
     >
       {children}
