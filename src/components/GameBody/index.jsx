@@ -59,8 +59,8 @@ const GameBody = () => {
       }
 
       setOldQuestionsArr((oldQuestions) => [
-        ...oldQuestions,
         formatedQuestionForOldQuestionsArr,
+        ...oldQuestions,
       ]);
 
       handleGenerateQuestion();
