@@ -8,6 +8,7 @@ import { useGame } from "../../hooks/useGame";
 import { usePlayer } from "../../hooks/usePlayer";
 
 import "./styles.scss";
+import BeforeStart from "../../screens/BeforeStart";
 
 const GameBody = () => {
   const { handleIncrementScore } = usePlayer();
@@ -18,7 +19,6 @@ const GameBody = () => {
     question,
     gameDifficulty,
     setOldQuestionsArr,
-    handleStartGame,
     handleGenerateQuestion,
     handleIncrementGameTime,
     handleDecrementGameTime,
@@ -92,9 +92,7 @@ const GameBody = () => {
         className='question-color'
         style={{ backgroundColor: questionAnswer }}
       >
-        {!isGameStarted && (
-          <button onClick={handleStartGame}>start</button>
-        )}
+        {!isGameStarted && <BeforeStart />}
       </section>
 
       {isGameStarted && (

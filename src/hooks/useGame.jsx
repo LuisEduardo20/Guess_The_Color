@@ -13,7 +13,8 @@ const GameContext = createContext({});
 export const GameProvider = ({ children }) => {
   const {
     playerScore,
-    playerName,
+    playerUserName,
+    setPlayerUserName,
     localScores,
     setLocalScores,
     setPlayerScore,
@@ -49,23 +50,29 @@ export const GameProvider = ({ children }) => {
   }, [gameDifficulty]);
 
   const handleStartGame = useCallback(() => {
+    if (!playerUserName || playerUserName.length < 3) {
+      window.alert("Please, set a nick name");
+      return;
+    }
+
     setIsGameStarted(true);
     handleGenerateQuestion();
     setOldQuestionsArr([]);
-  }, [handleGenerateQuestion]);
+  }, [handleGenerateQuestion, playerUserName]);
 
   const handleRestartGame = useCallback(() => {
     setIsGameStarted(false);
     setGameTime(30);
     setQuestion({});
     setPlayerScore(0);
+    setPlayerUserName("");
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleEndGame = () => {
     const playerResult = {
-      playerName,
       playerScore,
+      playerUserName,
     };
 
     setLocalScores([...localScores, playerResult]);
