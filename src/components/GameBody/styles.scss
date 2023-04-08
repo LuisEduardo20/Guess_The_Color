@@ -1,0 +1,59 @@
+.body {
+  width: 100%;
+
+  .progress-bar {
+    margin: 0;
+    padding: 0;
+
+    progress {
+      -webkit-appearance: none;
+      appearance: none;
+
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 10px;
+    }
+    &::-webkit-progress-bar,
+    &::-webkit-progress-value,
+    &::-moz-progress-bar,
+    &::-moz-progress-value {
+      background-color: yellow;
+    }
+  }
+
+  .question-color {
+    width: 100%;
+    height: 50vh;
+
+    background-color: cyan;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .answers-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    display: grid;
+
+    .answer {
+      height: 48px;
+    }
+  }
+
+  .easy-mode {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .medium-mode {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .hard-mode {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
