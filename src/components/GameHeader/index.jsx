@@ -11,7 +11,7 @@ const GameHeader = () => {
   return (
     <div className='header'>
       <section className='remaining-time'>
-        <h5>Remaining Time(s)</h5>
+        <h5>Time Left</h5>
         <p>{gameTime}s</p>
       </section>
 
@@ -22,11 +22,20 @@ const GameHeader = () => {
       <section className='score'>
         <div>
           <h5>High Score</h5>
-          <p>{highScore ? highScore.playerScore : "Empty"}</p>
+
+          {highScore ? (
+            <section>
+              <h6>{highScore.playerUserName}: </h6>
+              <p>{highScore.playerScore}</p>
+            </section>
+          ) : (
+            "Empty"
+          )}
+          <p></p>
         </div>
 
-        <div>
-          <h5>Score</h5>
+        <div className='player-score'>
+          <h5>Score:</h5>
           <p>{playerScore}</p>
         </div>
       </section>
