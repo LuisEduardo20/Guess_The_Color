@@ -84,69 +84,66 @@ const GameBody = () => {
 
   return (
     <div className='body'>
-      <section className='progress-bar'>
-        <progress value={gameTime} max='30' />
+      <section>
+        <section className='progress-bar'>
+          <progress value={gameTime} max='30' />
+        </section>
+
+        <section
+          className='question-color'
+          style={{ backgroundColor: questionAnswer }}
+        >
+          {!isGameStarted && <BeforeStart />}
+        </section>
       </section>
 
       <section
-        className='question-color'
-        style={{ backgroundColor: questionAnswer }}
+        className={`answers-container ${gameDifficulty}`}
+        style={{ opacity: isGameStarted ? "1" : "0" }}
       >
-        {!isGameStarted && <BeforeStart />}
+        <button
+          className='answer'
+          onClick={() => handleClickQuestionAnswer(question.answer0)}
+        >
+          {question.answer0}
+        </button>
+
+        <button
+          className='answer'
+          onClick={() => handleClickQuestionAnswer(question.answer1)}
+        >
+          {question.answer1}
+        </button>
+
+        <button
+          className='answer'
+          onClick={() => handleClickQuestionAnswer(question.answer2)}
+        >
+          {question.answer2}
+        </button>
+
+        {isMediumMode && (
+          <button
+            className='answer'
+            onClick={() =>
+              handleClickQuestionAnswer(question.answer3)
+            }
+          >
+            {question.answer3}
+          </button>
+        )}
+
+        {isHardMode && (
+          <button
+            className='answer'
+            onClick={() =>
+              handleClickQuestionAnswer(question.answer4)
+            }
+          >
+            {question.answer4}
+          </button>
+        )}
       </section>
-
-      {isGameStarted && (
-        <section className='answers-container easy-mode'>
-          <button
-            className='answer'
-            onClick={() =>
-              handleClickQuestionAnswer(question.answer0)
-            }
-          >
-            {question.answer0}
-          </button>
-
-          <button
-            className='answer'
-            onClick={() =>
-              handleClickQuestionAnswer(question.answer1)
-            }
-          >
-            {question.answer1}
-          </button>
-
-          <button
-            className='answer'
-            onClick={() =>
-              handleClickQuestionAnswer(question.answer2)
-            }
-          >
-            {question.answer2}
-          </button>
-
-          {isMediumMode && (
-            <button
-              className='answer'
-              onClick={() =>
-                handleClickQuestionAnswer(question.answer3)
-              }
-            >
-              {question.answer3}
-            </button>
-          )}
-
-          {isHardMode && (
-            <button
-              className='answer'
-              onClick={() =>
-                handleClickQuestionAnswer(question.answer4)
-              }
-            >
-              {question.answer4}
-            </button>
-          )}
-        </section>
-      )}
     </div>
   );
 };
