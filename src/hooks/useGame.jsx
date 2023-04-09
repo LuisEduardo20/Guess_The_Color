@@ -23,6 +23,7 @@ export const GameProvider = ({ children }) => {
   const [gameTime, setGameTime] = useState(30);
   const [gameDifficulty, setGameDifficulty] = useState("easy-mode");
   const [isGameStarted, setIsGameStarted] = useState(false);
+  const [isGameFinished, setIsGameFinished] = useState(false);
   const [question, setQuestion] = useState({});
   const [oldQuestionsArr, setOldQuestionsArr] = useState([]);
 
@@ -56,6 +57,7 @@ export const GameProvider = ({ children }) => {
     }
 
     setIsGameStarted(true);
+    setIsGameFinished(false);
     handleGenerateQuestion();
     setOldQuestionsArr([]);
   }, [handleGenerateQuestion, playerUserName]);
@@ -65,7 +67,7 @@ export const GameProvider = ({ children }) => {
     setGameTime(30);
     setQuestion({});
     setPlayerScore(0);
-    setPlayerUserName("");
+    setIsGameFinished(false);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -76,6 +78,18 @@ export const GameProvider = ({ children }) => {
     };
 
     setLocalScores([...localScores, playerResult]);
+    setIsGameFinished(true);
+  };
+
+  const handlePlayAgain = () => {
+    handleRestartGame();
+    handleStartGame();
+  };
+
+  const handleFinishPlay = () => {
+    setIsGameFinished(false);
+    setIsGameStarted(false);
+    setPlayerUserName("");
   };
 
   useEffect(() => {
@@ -103,6 +117,7 @@ export const GameProvider = ({ children }) => {
       value={{
         gameTime,
         isGameStarted,
+        isGameFinished,
         question,
         gameDifficulty,
         setGameDifficulty,
@@ -113,6 +128,8 @@ export const GameProvider = ({ children }) => {
         handleGenerateQuestion,
         handleIncrementGameTime,
         handleDecrementGameTime,
+        handlePlayAgain,
+        handleFinishPlay,
       }}
     >
       {children}

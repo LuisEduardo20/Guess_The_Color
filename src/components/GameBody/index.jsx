@@ -6,9 +6,10 @@ import React, {
 } from "react";
 import { useGame } from "../../hooks/useGame";
 import { usePlayer } from "../../hooks/usePlayer";
+import BeforeStart from "../../screens/BeforeStart";
+import FinishedGame from "../../screens/FinishedGame";
 
 import "./styles.scss";
-import BeforeStart from "../../screens/BeforeStart";
 
 const GameBody = () => {
   const { handleIncrementScore } = usePlayer();
@@ -16,6 +17,7 @@ const GameBody = () => {
   const {
     gameTime,
     isGameStarted,
+    isGameFinished,
     question,
     gameDifficulty,
     setOldQuestionsArr,
@@ -93,7 +95,8 @@ const GameBody = () => {
           className='question-color'
           style={{ backgroundColor: questionAnswer }}
         >
-          {!isGameStarted && <BeforeStart />}
+          {!isGameStarted && !isGameFinished && <BeforeStart />}
+          {isGameFinished && <FinishedGame />}
         </section>
       </section>
 
