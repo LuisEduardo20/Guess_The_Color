@@ -25,7 +25,7 @@ const BeforeStart = () => {
         <label htmlFor='game-difficulty'>Game difficulty:</label>
         <select
           id='game-difficulty'
-          defaultValue='easy-mode'
+          defaultValue={"easy-mode"}
           onChange={(e) => {
             setGameDifficulty(e.target.value);
           }}
