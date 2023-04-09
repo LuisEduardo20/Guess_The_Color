@@ -25,8 +25,9 @@ const GameHeader = () => {
 
           {highScore ? (
             <section>
-              <h6>{highScore.playerUserName}: </h6>
-              <p>{highScore.playerScore}</p>
+              <p>
+                {highScore.playerUserName}: {highScore.playerScore}
+              </p>
             </section>
           ) : (
             "Empty"
