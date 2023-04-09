@@ -4,6 +4,7 @@ import React, {
   createContext,
   useCallback,
   useEffect,
+  useMemo,
 } from "react";
 import { generateHexColor } from "../utils/generateHexColor";
 import { usePlayer } from "./usePlayer";
@@ -21,11 +22,18 @@ export const GameProvider = ({ children }) => {
   } = usePlayer();
 
   const [gameTime, setGameTime] = useState(30);
+  const [gameTimeHistory, setGameTimeHistory] = useState([]);
   const [gameDifficulty, setGameDifficulty] = useState("easy-mode");
   const [isGameStarted, setIsGameStarted] = useState(false);
   const [isGameFinished, setIsGameFinished] = useState(false);
   const [question, setQuestion] = useState({});
   const [oldQuestionsArr, setOldQuestionsArr] = useState([]);
+
+  const biggestGameTime = () => {
+    if (isGameStarted) return Math.max(...gameTimeHistory);
+
+    return 30;
+  };
 
   const handleDecrementGameTime = (decrementTime = 1) =>
     setGameTime((second) => second - decrementTime);
@@ -64,10 +72,11 @@ export const GameProvider = ({ children }) => {
 
   const handleRestartGame = useCallback(() => {
     setIsGameStarted(false);
+    setIsGameFinished(false);
     setGameTime(30);
+    setGameTimeHistory([]);
     setQuestion({});
     setPlayerScore(0);
-    setIsGameFinished(false);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -93,6 +102,10 @@ export const GameProvider = ({ children }) => {
   };
 
   useEffect(() => {
+    setGameTimeHistory((oldTimes) => [...oldTimes, gameTime]);
+  }, [gameTime]);
+
+  useEffect(() => {
     let interval = null;
 
     if (isGameStarted) {
@@ -116,6 +129,7 @@ export const GameProvider = ({ children }) => {
     <GameContext.Provider
       value={{
         gameTime,
+        biggestGameTime,
         isGameStarted,
         isGameFinished,
         question,

@@ -16,6 +16,7 @@ const GameBody = () => {
 
   const {
     gameTime,
+    biggestGameTime,
     isGameStarted,
     isGameFinished,
     question,
@@ -88,7 +89,7 @@ const GameBody = () => {
     <div className='body'>
       <section>
         <section className='progress-bar'>
-          <progress value={gameTime} max='30' />
+          <progress value={gameTime} max={biggestGameTime()} />
         </section>
 
         <section
