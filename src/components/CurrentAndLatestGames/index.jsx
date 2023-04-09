@@ -58,7 +58,7 @@ const CurrentAndLatestGames = () => {
                         ),
                       }}
                     >
-                      Wrong answer
+                      Clicked
                     </h5>
                     <p
                       style={{
@@ -75,9 +75,9 @@ const CurrentAndLatestGames = () => {
 
               <div className='icon-container'>
                 {oldQuestion.hitQuestion ? (
-                  <AiFillCheckCircle color='green' size={25} />
+                  <AiFillCheckCircle color='#01966e' size={25} />
                 ) : (
-                  <AiFillCloseCircle color='red' size={25} />
+                  <AiFillCloseCircle color='#ef476f' size={25} />
                 )}
               </div>
             </li>
