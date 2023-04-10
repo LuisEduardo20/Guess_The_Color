@@ -4,7 +4,6 @@ import React, {
   createContext,
   useCallback,
   useEffect,
-  useMemo,
 } from "react";
 import { generateHexColor } from "../utils/generateHexColor";
 import { usePlayer } from "./usePlayer";
@@ -29,12 +28,14 @@ export const GameProvider = ({ children }) => {
   const [question, setQuestion] = useState({});
   const [oldQuestionsArr, setOldQuestionsArr] = useState([]);
 
+  //? Maior tempo registrado, serve para colocar como max number na barra de tempo restante
   const biggestGameTime = () => {
     if (isGameStarted) return Math.max(...gameTimeHistory);
 
     return 30;
   };
 
+  //? Funções de lógica do jogo
   const handleDecrementGameTime = (decrementTime = 1) =>
     setGameTime((second) => second - decrementTime);
 
@@ -101,10 +102,12 @@ export const GameProvider = ({ children }) => {
     setPlayerUserName("");
   };
 
+  //? Atualiza o array de tempos registrados, serve para calcular o "biggestGameTime"
   useEffect(() => {
     setGameTimeHistory((oldTimes) => [...oldTimes, gameTime]);
   }, [gameTime]);
 
+  //? Lógica para realizar o interval de decremento do timer e de encerramento do jogo
   useEffect(() => {
     let interval = null;
 
