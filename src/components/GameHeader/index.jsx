@@ -23,16 +23,13 @@ const GameHeader = () => {
         <div>
           <h5>High Score</h5>
 
-          {highScore ? (
-            <section>
-              <p>
-                {highScore.playerUserName}: {highScore.playerScore}
-              </p>
-            </section>
-          ) : (
-            "Empty"
-          )}
-          <p></p>
+          <section>
+            <p>
+              {highScore
+                ? `${highScore.playerUserName}: ${highScore.playerScore}`
+                : "Empty"}
+            </p>
+          </section>
         </div>
 
         <div className='player-score'>
