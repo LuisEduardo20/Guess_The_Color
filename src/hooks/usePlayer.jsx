@@ -41,10 +41,6 @@ export const PlayerProvider = ({ children }) => {
     return scoresArr[higherIndex];
   };
 
-  const handleAddLocalScore = () => {
-    //TODO function to add score on local storage
-  };
-
   const highScore = useMemo(() => {
     return handleGetHighScore(localScores);
   }, [localScores]);
@@ -53,17 +49,20 @@ export const PlayerProvider = ({ children }) => {
     setPlayerScore((score) => score + 4);
   }, []);
 
+  const setPlayerUserNameCallback = useCallback((value) => {
+    setPlayerUserName(value);
+  }, []);
+
   return (
     <PlayerContext.Provider
       value={{
         playerUserName,
-        setPlayerUserName,
+        setPlayerUserNameCallback,
         playerScore,
         setPlayerScore,
         localScores,
         setLocalScores,
         highScore,
-        handleAddLocalScore,
         handleIncrementScore,
       }}
     >
