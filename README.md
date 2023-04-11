@@ -30,12 +30,19 @@ Execute o projeto:
   yarn start
 ```
 
-## Funcionalidades
+## Funcionalidades opcionais
 
-- [ ]
+- [x] Seletor de dificuldade
+- [x] Pedir nick name
+- [x] Decremento do tempo de jogo ao errar a pergunta
+- [x] Incremento do tempo de jogo ao acertar a pergunta
 
 ## Stack utilizada
 
-**Front-end:** React, Javascript, Create-React-App, React-Icons.
+**Front-end:** React, Javascript, Create-React-App, React-Icons, Font Color Contrast, SASS.
 
-## Melhorias
+## Deploy
+
+Link para visitar a aplicação web:
+
+[https://soft-expert-challenge.vercel.app/](https://soft-expert-challenge.vercel.app/)
