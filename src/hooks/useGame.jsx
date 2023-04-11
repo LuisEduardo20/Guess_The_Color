@@ -28,14 +28,14 @@ export const GameProvider = ({ children }) => {
   const [question, setQuestion] = useState({});
   const [oldQuestionsArr, setOldQuestionsArr] = useState([]);
 
-  //? Maior tempo registrado, serve para colocar como max number na barra de tempo restante
+  //? Greatest recorded time, serves to put as max number in the remaining time bar
   const biggestGameTime = () => {
     if (isGameStarted) return Math.max(...gameTimeHistory);
 
     return 30;
   };
 
-  //? Funções de lógica do jogo
+  //? Game logic functions
   const handleDecrementGameTime = (decrementTime = 1) =>
     setGameTime((second) => second - decrementTime);
 
@@ -102,12 +102,12 @@ export const GameProvider = ({ children }) => {
     setPlayerUserName("");
   };
 
-  //? Atualiza o array de tempos registrados, serve para calcular o "biggestGameTime"
+  //? Updates the array of recorded times, serves to calculate the "biggestGameTime"
   useEffect(() => {
     setGameTimeHistory((oldTimes) => [...oldTimes, gameTime]);
   }, [gameTime]);
 
-  //? Lógica para realizar o interval de decremento do timer e de encerramento do jogo
+  //? Logic to perform the timer decrement interval and game end
   useEffect(() => {
     let interval = null;
 
