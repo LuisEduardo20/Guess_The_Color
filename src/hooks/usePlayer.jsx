@@ -20,7 +20,7 @@ export const PlayerProvider = ({ children }) => {
   const handleGetHighScore = (scoresArr) => {
     //? local score data example
     //! {
-    //!   playerName: "Eduardo",
+    //!   playerUserName: "Eduardo",
     //!   playerScore: 20
     //! }
 
