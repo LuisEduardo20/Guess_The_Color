@@ -5,7 +5,7 @@ import { useGame } from "../../hooks/useGame";
 import "./styles.scss";
 
 const BeforeStart = () => {
-  const { setPlayerUserName } = usePlayer();
+  const { setPlayerUserNameCallback } = usePlayer();
   const { handleStartGame, gameDifficulty, setGameDifficulty } =
     useGame();
 
@@ -17,7 +17,7 @@ const BeforeStart = () => {
           type='text'
           id='player-name'
           placeholder='Ex: duduchaos20'
-          onChange={(e) => setPlayerUserName(e.target.value)}
+          onChange={(e) => setPlayerUserNameCallback(e.target.value)}
         />
       </section>
 
