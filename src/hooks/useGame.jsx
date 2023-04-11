@@ -78,7 +78,6 @@ export const GameProvider = ({ children }) => {
     setGameTimeHistory([]);
     setQuestion({});
     setPlayerScore(0);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleEndGame = () => {
@@ -125,7 +124,6 @@ export const GameProvider = ({ children }) => {
     }
 
     return () => clearInterval(interval);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isGameStarted, gameTime]);
 
   return (
