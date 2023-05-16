@@ -1,4 +1,4 @@
-# Desafio FrontEnd Jr.
+# Guess The Color
 
 ## Instalação
 
