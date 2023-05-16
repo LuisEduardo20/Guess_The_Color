@@ -30,7 +30,7 @@ Execute o projeto:
   yarn start
 ```
 
-## Funcionalidades opcionais
+## Funcionalidades
 
 - [x] Seletor de dificuldade
 - [x] Pedir nick name
