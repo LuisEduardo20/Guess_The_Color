@@ -5,11 +5,11 @@
 Clone o repositório com o comando
 
 ```bash
-  git clone https://github.com/LuisEduardo20/soft_expert-challenge.git
+  git clone https://github.com/LuisEduardo20/Guess_The_Color.git
 
   ou via SSH:
 
-  git clone git@github.com:LuisEduardo20/soft_expert-challenge.git
+  git clone git@github.com:LuisEduardo20/Guess_The_Color.git
 ```
 
 Entre na pasta:
