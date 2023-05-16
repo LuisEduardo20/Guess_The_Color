@@ -15,7 +15,7 @@ Clone o repositório com o comando
 Entre na pasta:
 
 ```bash
-  cd soft_expert-challenge/
+  cd Guess_The_Color/
 ```
 
 Instale as dependências:
