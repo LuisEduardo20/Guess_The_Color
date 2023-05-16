@@ -45,4 +45,4 @@ Execute o projeto:
 
 Link para visitar a aplicação web:
 
-[https://soft-expert-challenge.vercel.app/](https://soft-expert-challenge.vercel.app/)
+[https://react-guess-the-color-game.vercel.app/](https://react-guess-the-color-game.vercel.app/)
