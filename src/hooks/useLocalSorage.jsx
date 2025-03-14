@@ -1,5 +1,5 @@
 //? Hook get on: https://usehooks.com/useLocalStorage/
-import React, { useState } from "react";
+import { useState } from "react";
 
 export const useLocalStorage = (key, initialValue) => {
   const [storedValue, setStoredValue] = useState(() => {
@@ -22,10 +22,7 @@ export const useLocalStorage = (key, initialValue) => {
         value instanceof Function ? value(storedValue) : value;
       setStoredValue(valueToStore);
       if (typeof window !== "undefined") {
-        window.localStorage.setItem(
-          key,
-          JSON.stringify(valueToStore)
-        );
+        window.localStorage.setItem(key, JSON.stringify(valueToStore));
       }
     } catch (error) {
       console.log(error);

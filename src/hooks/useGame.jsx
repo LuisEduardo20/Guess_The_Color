@@ -78,7 +78,7 @@ export const GameProvider = ({ children }) => {
     setGameTimeHistory([]);
     setQuestion({});
     setPlayerScore(0);
-  }, []);
+  }, [setPlayerScore]);
 
   const handleEndGame = () => {
     const playerResult = {
@@ -124,7 +124,7 @@ export const GameProvider = ({ children }) => {
     }
 
     return () => clearInterval(interval);
-  }, [isGameStarted, gameTime]);
+  }, [isGameStarted, gameTime, handleEndGame, handleRestartGame]);
 
   return (
     <GameContext.Provider

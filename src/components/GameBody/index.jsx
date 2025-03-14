@@ -1,9 +1,4 @@
-import React, {
-  useCallback,
-  useEffect,
-  useMemo,
-  useState,
-} from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { useGame } from "../../hooks/useGame";
 import { usePlayer } from "../../hooks/usePlayer";
 import BeforeStart from "../../screens/BeforeStart";
@@ -68,7 +63,14 @@ const GameBody = () => {
 
       handleGenerateQuestion();
     },
-    [questionAnswer]
+    [
+      questionAnswer,
+      handleDecrementGameTime,
+      handleGenerateQuestion,
+      handleIncrementGameTime,
+      handleIncrementScore,
+      setOldQuestionsArr,
+    ]
   );
 
   useEffect(() => {
@@ -85,14 +87,14 @@ const GameBody = () => {
   }, [gameDifficulty]);
 
   return (
-    <div className='body'>
+    <div className="body">
       <section>
-        <section className='progress-bar'>
+        <section className="progress-bar">
           <progress value={gameTime} max={biggestGameTime()} />
         </section>
 
         <section
-          className='question-color'
+          className="question-color"
           style={{ backgroundColor: questionAnswer }}
         >
           {!isGameStarted && !isGameFinished && <BeforeStart />}
@@ -105,21 +107,21 @@ const GameBody = () => {
         style={{ opacity: isGameStarted ? "1" : "0" }}
       >
         <button
-          className='answer'
+          className="answer"
           onClick={() => handleClickQuestionAnswer(question.answer0)}
         >
           {question.answer0}
         </button>
 
         <button
-          className='answer'
+          className="answer"
           onClick={() => handleClickQuestionAnswer(question.answer1)}
         >
           {question.answer1}
         </button>
 
         <button
-          className='answer'
+          className="answer"
           onClick={() => handleClickQuestionAnswer(question.answer2)}
         >
           {question.answer2}
@@ -127,10 +129,8 @@ const GameBody = () => {
 
         {isMediumMode && (
           <button
-            className='answer'
-            onClick={() =>
-              handleClickQuestionAnswer(question.answer3)
-            }
+            className="answer"
+            onClick={() => handleClickQuestionAnswer(question.answer3)}
           >
             {question.answer3}
           </button>
@@ -138,10 +138,8 @@ const GameBody = () => {
 
         {isHardMode && (
           <button
-            className='answer'
-            onClick={() =>
-              handleClickQuestionAnswer(question.answer4)
-            }
+            className="answer"
+            onClick={() => handleClickQuestionAnswer(question.answer4)}
           >
             {question.answer4}
           </button>
